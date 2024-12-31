@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+use flake
+export PATH="$PWD/.bin:$PATH"
+

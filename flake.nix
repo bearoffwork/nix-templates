@@ -10,6 +10,9 @@
       home-mini = {
         path = ./home/mini;
       };
+      php-nodejs = {
+        path = ./php-nodejs;
+      };
     };
   };
 }
