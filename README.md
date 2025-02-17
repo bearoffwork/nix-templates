@@ -13,8 +13,9 @@
 - [TBD][home-complete](./templates/home/complete):
     - Complete home-manager configuration of my config, though it may not always be up-to-date. 
 
-- [TBD]php83:
+- [php83-nodejs](./templates/php83-nodejs):
     - php 8.3 dev shell with only required extension, for laravel.
+    - A php script to update PhpStorm Interpreter settings to use php in flake.
 
 
 ## Templates Usage: `home-*`

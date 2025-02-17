@@ -10,8 +10,8 @@
       home-mini = {
         path = ./home/mini;
       };
-      php-nodejs = {
-        path = ./php-nodejs;
+      php83-nodejs = {
+        path = ./php83-nodejs;
       };
     };
   };
