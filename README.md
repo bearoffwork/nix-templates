@@ -2,7 +2,7 @@
 
 ## Templates
 
-- [home-mini](./templates/home/mini):
+- [home-mini](./home/mini):
     - A minimal [home-manager](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone) configuration flake.
     - Completely Documented
     - Zsh with prompt (powerlevel10k/starship) options.
@@ -13,9 +13,12 @@
 - [TBD][home-complete](./templates/home/complete):
     - Complete home-manager configuration of my config, though it may not always be up-to-date. 
 
-- [php83-nodejs](./templates/php83-nodejs):
-    - php 8.3 dev shell with only required extension, for laravel.
+- [php83-nodejs](./php83-nodejs):
+    - A dev shell with php 8.3 with only required extension and nodejs, for laravel.
     - A php script to update PhpStorm Interpreter settings to use php in flake.
+    ```shell
+    nix flake init -t github:bearoffwork/nix-templates#php83-nodejs
+    ```
 
 
 ## Templates Usage: `home-*`
