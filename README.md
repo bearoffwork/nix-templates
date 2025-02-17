@@ -18,6 +18,9 @@
     - A php script to update PhpStorm Interpreter settings to use php in flake.
     ```shell
     nix flake init -t github:bearoffwork/nix-templates#php83-nodejs
+    nix flake update
+    cp .envrc.example .envrc
+    direnv allow
     ```
 
 
