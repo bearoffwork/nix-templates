@@ -4,18 +4,6 @@ use Ramsey\Uuid\Uuid;
 
 require 'vendor/autoload.php';
 
-$phpXmlPath = __DIR__.'/.idea/php.xml';
-
-// Create php.xml if not exists.
-if (!file_exists($phpXmlPath)) {
-    file_put_contents($phpXmlPath, <<<'XML'
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-</project>
-XML
-    );
-}
-
 function createInterpreterIfNotExists(SimpleXMLElement $root): string
 {
     $existingInterpreter = $root->xpath('//interpreter[@home="$PROJECT_DIR$/.bin/php"]')[0] ?? null;
@@ -52,20 +40,41 @@ function createInterpreterIfNotExists(SimpleXMLElement $root): string
 // +  <component name="PhpExternalFormatter">
 // +    <option name="externalFormatter" value="LARAVEL_PINT" />
 // +  </component>
-// function setExternalFormatterToPint(SimpleXMLElement $root): void
-// {
-//     $formatter = $root->xpath('//component[@name="PhpExternalFormatter"]')[0] ?? null;
-//     if ($formatter !== null) {
-//
-//         $selectedFormatter = (string) $formatter->option->attributes()->value;
-//         printf("Found formatter: %s\n", $selectedFormatter);
-//
-//         return;
-//     }
-//
-// }
+function setExternalFormatterToPint(SimpleXMLElement $root): void
+{
+    $formatter = $root->xpath('//component[@name="PhpExternalFormatter"]')[0] ?? null;
+    if ($formatter !== null) {
 
-// Load existing php.xml
-$phpXml = simplexml_load_file($phpXmlPath);
+        $selectedFormatter = (string) $formatter->option->attributes()->value;
+        printf("Found formatter: %s\n", $selectedFormatter);
+
+        return;
+    }
+
+    $formatter = $root->addChild('component');
+    $formatter->addAttribute('name', 'PhpExternalFormatter');
+    $fmtOption = $formatter->addChild('option');
+    $fmtOption->addAttribute('name', 'externalFormatter');
+    $fmtOption->addAttribute('value', 'LARAVEL_PINT');
+}
+
+function getPhpXml(string $path): SimpleXMLElement
+{
+    if (file_exists($path)) {
+        return simplexml_load_file($path);
+    }
+
+    printf("Interpreter settings not found at: %s, creating new one.\n", str($path)->after(__DIR__)->ltrim('/'));
+
+    return simplexml_load_string('<?xml version="1.0" encoding="UTF-8"?><project version="4"></project>');
+}
+
+$phpXmlPath = __DIR__.'/.idea/php.xml';
+$phpXml = getphpxml($phpXmlPath);
 createInterpreterIfNotExists($phpXml);
+
+if (file_exists(__DIR__.'/pint.json')
+    && file_exists(__DIR__.'/vendor/bin/pint')) {
+    setExternalFormatterToPint($phpXml);
+}
 $phpXml->asXML($phpXmlPath);
