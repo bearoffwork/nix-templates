@@ -25,11 +25,10 @@
     # This is a function that generates an attribute by calling a function you pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-
     # Standalone home-manager configuration entrypoint
     homeConfigurations."{{ username }}" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."{{ system }}";
-      modules = [ ./home.nix ];
+      modules = [./home.nix];
     };
 
     # Set formatter so we can format nix files with `nix fmt`

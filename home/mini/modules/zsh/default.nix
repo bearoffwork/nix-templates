@@ -27,7 +27,7 @@
     # A smarter cd command, like z and autojump.
     # https://github.com/ajeetdsouza/zoxide
     zoxide
-    
+
     # fuzzy finder
     # https://github.com/junegunn/fzf
     fzf
@@ -62,7 +62,7 @@
       autosuggestion.enable = true;
       # Enable zsh-syntax-highlighting
       syntaxHighlighting.enable = true;
-      
+
       # history substring search, type `cd` and press up arrow to search history with `cd` in it.
       # https://github.com/zsh-users/zsh-history-substring-search
       historySubstringSearch.enable = true;
