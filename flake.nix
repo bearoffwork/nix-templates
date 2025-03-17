@@ -23,6 +23,9 @@
       php83-nodejs = {
         path = ./php83-nodejs;
       };
+      php74 = {
+        path = ./php74;
+      };
     };
 
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
